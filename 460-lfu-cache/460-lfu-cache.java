@@ -68,7 +68,7 @@ class LFUCache {
             }
             fre.remove(kapa);
             map.remove(kapa);
-        }
+           }
             int redirect=1;
              c++;
             if(dq.containsKey(redirect)==false)
@@ -79,14 +79,7 @@ class LFUCache {
             fre.put(key,redirect);
             map.put(key,value);
         }
-//         System.out.println(dq);
-//         System.out.println(fre);
-//         System.out.println(map);
-        
-        
-//          System.out.println(dq);
-//         System.out.println(fre);
-//         System.out.println(map);
+
     }
 }
 
