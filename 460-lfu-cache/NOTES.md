@@ -1,49 +1,23 @@
+same as lru but the only change here u have to make is you have to keep track of frequency so make an map of frequency of dque keeptrack of element with there frequency no like if1 has frequency 2 then link 1--->2 so go on
+​
+```
+class LFUCache {
+TreeMap<Integer,Deque<Integer>> dq;
+HashMap<Integer,Integer> map;
+HashMap<Integer,Integer> fre;
+int size;int c=0;
+public LFUCache(int capacity) {
+dq=new TreeMap<Integer,Deque<Integer>>();
+map=new HashMap<Integer,Integer>();
+fre=new HashMap<Integer,Integer>();
+size=capacity;
 }
-if(dq.containsKey(redirect+1)==false)
+public int get(int key)
 {
-dq.put(redirect+1,new ArrayDeque<Integer>());
-}
-dq.get(redirect+1).offerLast(key);
-fre.put(key,redirect+1);
-map.put(key,value);
-}
-else
+if(map.containsKey(key))
 {
-if(size==0)
-{
-return;
-}
-if(c==size)
-{
-c--;
-int redirect=dq.firstKey();
-int kapa=dq.get(redirect).getFirst();
-dq.get(redirect).pollFirst();
+int redirect=fre.get(key);
+dq.get(redirect).remove(key);
 if(dq.get(redirect).size()==0)
 {
 dq.remove(redirect);
-}
-fre.remove(kapa);
-map.remove(kapa);
-}
-int redirect=1;
-c++;
-if(dq.containsKey(redirect)==false)
-{
-dq.put(redirect,new ArrayDeque<Integer>());
-}
-dq.get(redirect).offerLast(key);
-fre.put(key,redirect);
-map.put(key,value);
-}
-​
-}
-}
-​
-/**
-* Your LFUCache object will be instantiated and called as such:
-* LFUCache obj = new LFUCache(capacity);
-* int param_1 = obj.get(key);
-* obj.put(key,value);
-*/
-```
