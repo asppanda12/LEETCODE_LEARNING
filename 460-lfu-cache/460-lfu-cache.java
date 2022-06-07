@@ -57,7 +57,7 @@ class LFUCache {
                 return;
             }
             if(c==size)
-        {
+            {
             c--;
             int redirect=dq.firstKey();
             int kapa=dq.get(redirect).getFirst();
