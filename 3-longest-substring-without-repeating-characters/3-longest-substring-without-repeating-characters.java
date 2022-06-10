@@ -20,20 +20,23 @@ HashMap<Character,Integer> map=new HashMap<Character,Integer>();
     while(end<n)
         {
         
-                while(check(map)==false)
-                {
-                    map.replace(s.charAt(start),map.get(s.charAt(start))-1);
-                        //map[s[start]]--;
-                    start++;
-                }
+               
          
-          max=Math.max(end-start+1,max);
+                          max=Math.max(end-start+1,max);
+
         end++;
              if(end<n)
              {
                  map.put(s.charAt(end),map.getOrDefault(s.charAt(end),0)+1);
                  //map[s[end]]++;
              }
+         while(check(map)==false)
+                {
+                    map.replace(s.charAt(start),map.get(s.charAt(start))-1);
+                        //map[s[start]]--;
+                    start++;
+                }
+
         }
       
         return max;
