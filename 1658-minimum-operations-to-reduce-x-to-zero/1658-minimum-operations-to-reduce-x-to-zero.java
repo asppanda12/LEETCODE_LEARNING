@@ -1,31 +1,6 @@
 class Solution 
 {
-    /*
-    public int minOperations(int[] nums, int x) {
-        int sum = 0;
-        for (int n : nums) {
-            sum += n;
-        }
-        
-        int delta = sum - x;
-        if (delta < 0) {
-            return -1;
-        }
-        
-        int l = 0, cur = 0, min = Integer.MAX_VALUE;
-        for (int i = 0; i < nums.length; i++) {
-            cur += nums[i];
-            while (cur > delta) {
-                cur -= nums[l];
-                l++;
-            } 
-            if (cur == delta) {
-                min = Math.min(min, nums.length - (i - l  + 1));
-            }
-        }
-        return min == Integer.MAX_VALUE ? -1 : min;
-    }
-    */
+    
     public int minOperations(int[] nums, int x) 
     {
         int n=nums.length;
