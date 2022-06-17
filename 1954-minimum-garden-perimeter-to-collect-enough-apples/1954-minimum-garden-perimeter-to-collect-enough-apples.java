@@ -1,32 +1,30 @@
 class Solution {
-    public long minimumPerimeter(long neededApples)
-    {
-        long prev_sum[]=new long[600000];
-        long dp[]=new long[600000];
-        prev_sum[1]=2+1+2;
-        dp[1]=12;
-        for(int i=2;i<600000;i++)
-        {
-            prev_sum[i]=prev_sum[i-1]+(i+i)*2+(2*i+1-2);
-            dp[i]=(prev_sum[i-1]+(2*i+1-2)+(i+i))*4;
+    
+    
+    
+    public long minimumPerimeter(long neededApples) {
+        if (neededApples == 0) {
+            return 0L;
         }
-       long sum=0;
-        for(int i=1;i<600000;i++)
-        {
-            if(sum+dp[i]>neededApples)
-            {
-                return 2*i*4;
-            }
-            else
-            if(sum+dp[i]==neededApples)
-            {
-                return 2*i*4;
-            }
-            else
-            {
-                  sum=sum+dp[i];
+        
+        long left = 1;
+        long right = 100000;
+        
+        while (left < right) {
+            long middle = (right - left) / 2 + left;
+            
+            if (appleCount(middle) < neededApples) {
+                left = middle + 1;
+            } else {
+                right = middle;
             }
         }
-        return 1;
+        
+        return left * 8;
     }
+    
+    private long appleCount(long m) {
+        return m*m*m*4 + m*m*6 + m*2;
+    }
+    
 }
