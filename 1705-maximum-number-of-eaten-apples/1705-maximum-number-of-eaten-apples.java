@@ -39,7 +39,7 @@ class Solution
                         }
 
         }
-        System.out.println(t);
+
         int day=n;
         while(pq.isEmpty()==false)
         {
