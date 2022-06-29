@@ -65,6 +65,7 @@ class Solution
                         // System.out.println(map+" "+dist);
                         return dist+1;
                     }
+                        // v[board[x][y]]=1;
                          map.put(board[x][y],t);
                     }
                 }
