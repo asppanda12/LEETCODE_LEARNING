@@ -28,11 +28,11 @@ class Solution
         v[1]=1;
                 HashMap<Integer,Integer> map=new HashMap<Integer,Integer>();
 
-        
+        int dist=0;
         while(qu.isEmpty()==false)
         {
             int t=qu.peek().x;
-                 int dist=qu.peek().y;
+            dist=qu.peek().y;
             qu.poll();
             if(t==n*n)
             {
@@ -42,10 +42,16 @@ class Solution
             {
                 if(v[i]==0)
                 {
+                   
                     v[i]=1;
                     Pair tp=conv(i,n);
                     int x=tp.x;
                     int y=tp.y;
+                   if(i==n*n)
+                    {
+                        // System.out.println(map+" "+dist);
+                        return dist+1;
+                    }
                     if(board[x][y]==-1)
                     {
                         qu.add(new Pair(i,dist+1));
@@ -54,6 +60,11 @@ class Solution
                     else
                     {
                          qu.add(new Pair(board[x][y],dist+1));
+                         if(board[x][y]==n*n)
+                    {
+                        // System.out.println(map+" "+dist);
+                        return dist+1;
+                    }
                          map.put(board[x][y],t);
                     }
                 }
