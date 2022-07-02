@@ -1,11 +1,11 @@
 class Solution
 {
-    public static long val(int[] arr,int k,int i,int t,int n,long dp[][][])
+     public static int val(int a[],int i,int n,int t,int dp[][][],int k)
     {
-        if(k==0)
-        {
-            return 0;
-        }
+         if(k==0)
+         {
+             return 0;
+         }
         if(i==n)
         {
             if(t==0 && k>0)
@@ -13,41 +13,37 @@ class Solution
                 return 0;
             }
             else
-            {
-                return Integer.MIN_VALUE;
-            }
+            return -100000;
         }
+         
         if(dp[i][k][t]!=-1)
         {
             return dp[i][k][t];
         }
-        long output1=val(arr,k,i+1,t,n,dp);
-        long output2=0;
+        int op1=val(a,i+1,n,t,dp,k);
+         int op2=0;
+        if(t==1)
+        {
+         op2=a[i]+val(a,i+1,n,t^1,dp,k-1);
+        }
         if(t==0)
         {
-            output2=val(arr,k,i+1,t^1,n,dp)-arr[i];
+         op2=-1*a[i]+val(a,i,n,t^1,dp,k);
         }
-        else
-        {
-            output2=arr[i]+val(arr,k-1,i+1,t^1,n,dp);
-        }
-        return dp[i][k][t]=Math.max(output1,output2);
+         
+        return dp[i][k][t]=Math.max(op1,op2);
     }
-    public int maxProfit(int[] prices) 
+    public int maxProfit(int[] prices)
     {
-        long dp[][][]=new long[prices.length+1][3][2];
-
-        for(int i=0;i<=prices.length;i++)
+        int n=prices.length;
+        int dp[][][]=new int[n+10][3][3];
+        for(int i=0;i<=n;i++)
         {
             for(int j=0;j<3;j++)
             {
-                 for(int k=0;k<2;k++)
-            {
-                dp[i][j][k]=-1;
-            }
+                Arrays.fill(dp[i][j],-1);
             }
         }
-        return (int)(val(prices,2,0,0,prices.length,dp));
-        
+        return val(prices,0,n,0,dp,2);
     }
 }
