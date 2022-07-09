@@ -25,16 +25,13 @@ class Solution {
             return head.next;
         }
         cnt=0;temp=head;
-        while(temp!=null)
+        while(cnt<dv-1)
         {
             cnt++;
-            if(cnt==dv)
-            {
-                ListNode t=temp.next;
-                temp.next=t.next;
-            }
             temp=temp.next;
         }
+       ListNode temp1=temp.next;
+        temp.next=temp1.next;
         return head;
     }
 }
