@@ -6,7 +6,7 @@ class Solution
         {
             return 0;
         }
-        if(n==0 || sum<0)
+        if(n<=0)
         {
             return Integer.MAX_VALUE;
         }
@@ -14,10 +14,19 @@ class Solution
         {
             return dp[n][sum];
         }
-        if(val(arr,sum-arr.get(n-1),dp,n)!=Integer.MAX_VALUE)
-        return dp[n][sum]=Math.min(1+val(arr,sum-arr.get(n-1),dp,n),val(arr,sum,dp,n-1));
+        if(sum<arr.get(n-1))
+        {
+            return dp[n][sum]=val(arr,sum,dp,n-1);
+        }
         else
-        return dp[n][sum]=Math.min(val(arr,sum-arr.get(n-1),dp,n),val(arr,sum,dp,n-1));
+        {
+            if(val(arr,sum-arr.get(n-1),dp,n)==Integer.MAX_VALUE)
+            {
+                return dp[n][sum]=val(arr,sum,dp,n-1);
+            }
+            else
+            return dp[n][sum]=Math.min(1+val(arr,sum-arr.get(n-1),dp,n),val(arr,sum,dp,n-1));
+        }
     }
     public int minimumNumbers(int num, int k) 
     {
