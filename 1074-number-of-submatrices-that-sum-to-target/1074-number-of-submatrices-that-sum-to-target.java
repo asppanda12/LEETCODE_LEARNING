@@ -16,24 +16,24 @@ class Solution {
             }
         }
         int count=0;
-        for(int start=0;start<m;start++)
-        {
-            for(int end=start;end<m;end++)
-            {
-                HashMap<Long,Integer> map=new  HashMap<Long,Integer>();
-                long sum=0;
-                for(int i=0;i<n;i++)
-                {
-                    map.put(sum,map.getOrDefault(sum,0)+1);
-                    long pre=start!=0?dp[i][start-1]:0;
-                    sum+=dp[i][end]-pre;
-                    if(map.containsKey(sum-target))
-                    {
-                        count+=map.get(sum-target);
-                    }
-                }
-            }
-        }
+       for(int start=0;start<m;start++) 
+       {
+           for(int j=start;j<m;j++)
+           {
+               HashMap<Long,Integer> map=new HashMap<Long,Integer>();
+               long sum=0;
+               for(int i=0;i<n;i++)
+               {
+                     map.put(sum,map.getOrDefault(sum,0)+1);
+                    long pre=(start!=0?dp[i][start-1]:0);
+                    sum+=dp[i][j]-pre;
+                   if(map.containsKey(sum-target)==true)
+                   {
+                       count+=map.get(sum-target);
+                   }
+               }
+           }
+       }
         return count;
         
     }
