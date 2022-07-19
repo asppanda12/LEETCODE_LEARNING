@@ -1,31 +1,29 @@
 class Solution {
-       public static int longestSubarray(int[] nums, int limit)
-    {
-    	int n=nums.length;
-    	PriorityQueue<Integer> min=new PriorityQueue<Integer>();
-    	PriorityQueue<Integer> max=new PriorityQueue<Integer>(Collections.reverseOrder());
-    	int low=0;int high=0;
-    	
-    	int pre=-1;
-    	int dp[]=new int[n];
-    	Arrays.fill(dp,1);
-    	int maxi=0;
-    	for(int i=0;i<nums.length;i++)
-    	{
-    		
-    		min.add(nums[i]);
-        	max.add(nums[i]);
-        	while(Math.abs(max.peek()-min.peek())>limit)
-        	{
-        		min.remove(nums[low]);
-        		max.remove(nums[low]);
-        		low++;
-        	}
-       
-        	maxi=Math.max(high-low+1, maxi);
-        	high++;
-    	}
-    	return maxi;
+    public int longestSubarray(int[] nums, int limit) {
+        Deque<Integer> max = new ArrayDeque();
+        Deque<Integer> min = new ArrayDeque();
+        int j = 0, res = 1;
+        for (int i = 0; i < nums.length; ++i) {
+            while (!max.isEmpty() && max.peekLast() < nums[i])
+                max.removeLast();
             
+            max.addLast(nums[i]);
+            while (!min.isEmpty() && min.peekLast() > nums[i])
+                min.removeLast();
+            
+            min.addLast(nums[i]);
+            while (j < nums.length && max.peekFirst() - min.peekFirst() > limit) {
+                if (max.peekFirst() == nums[j])
+                    max.pollFirst();
+                if (min.peekFirst() == nums[j])
+                    min.pollFirst();
+                
+                ++j;
+            }
+            
+            res = Math.max(res, i - j + 1);
+        }
+        
+        return res;
     }
 }
