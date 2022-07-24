@@ -26,17 +26,21 @@ class Solution
              int sum=0;t++;
              for(int i=0;i<size;i++)
              {
-                 sum+=qu.peek().val;
-                 if(qu.peek().left!=null)
-                 qu.add(qu.peek().left);
-                 if(qu.peek().right!=null)
-                 qu.add(qu.peek().right);
-                 qu.poll();  
+                 TreeNode ro=qu.poll();
+                 sum+=ro.val;
+                 if(ro.left!=null)
+                 {
+                     qu.add(ro.left);
+                 }
+                  if(ro.right!=null)
+                 {
+                     qu.add(ro.right);
+                 }
              }
-             if(max<sum)
+             if(sum>max)
              {
-                 level=t;
                  max=sum;
+                 level=t;
              }
          }
         return level;
