@@ -1,8 +1,12 @@
-select Email from
-(
-select email,count(email) as num
+# select Email from
+# (
+# select email,count(email) as num
+# from Person
+# group by email
+# )
+# as statastic
+# where num>1;
+select Email 
 from Person
 group by email
-)
-as statastic
-where num>1;
+Having count(email)>1;
