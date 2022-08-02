@@ -43,19 +43,16 @@ class Solution
     public int majorityElement(int[] nums)
     {
          int n=nums.length;
-        Arrays.sort(nums);
-         for(int i=0;i<n;)
+         int candidate=0;
+         int count=0;
+         for(int i=0;i<n;i++)
          {
-             // System.out.println(Upper_bound(nums,nums[i])+" "+lower_bound(nums,nums[i])+" "+nums[i]);
-             if((Upper_bound(nums,nums[i])-lower_bound(nums,nums[i]))>n/2)
+             if(count==0)
              {
-                 return nums[i];
+                 candidate=nums[i];
              }
-             else
-             {
-                 i=Upper_bound(nums,nums[i]);
-             }
+            count+=(candidate==nums[i])?1:-1;
          }
-        return -1;
+        return candidate;
     }
 }
