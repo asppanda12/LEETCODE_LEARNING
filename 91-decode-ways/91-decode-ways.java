@@ -1,35 +1,30 @@
 class Solution 
 {
-    public static int val(String s,int pos,int j,int dp[])
+    public static int val(String s,int pos,int n,int dp[])
     {
-        if(pos==j+1)
+        if(pos==n)
         {
             return 1;
         }
-        int total=0;
         if(dp[pos]!=-1)
         {
             return dp[pos];
         }
-        for(int i=pos;i<=j;i++)
+        int ans=0;
+        int op1=(int)(s.charAt(pos)-'0');
+        int op2=0;
+        if(pos+1<n)
         {
-            String str=s.substring(pos,i+1);
- 
-            if(str.length()<=2 && str.charAt(0)!='0')
-            {
-                int t=Integer.parseInt(str);
-                if(t<=26 && t>=1)
-                {
-                    total+=val(s,i+1,j,dp);
-                }
-            }
+            op2=Integer.parseInt(s.substring(pos,pos+2));
         }
-        return dp[pos]=total;
+        if(op1>0)ans+=val(s,pos+1,n,dp);
+        if(op1>0 && op2>0 && op2<=26)ans+=val(s,pos+2,n,dp);
+        return dp[pos]=ans;
     }
     public int numDecodings(String s) 
     {
         int dp[]=new int[s.length()+1];
         Arrays.fill(dp,-1);
-        return val(s,0,s.length()-1,dp);
+        return val(s,0,s.length(),dp);
     }
 }
