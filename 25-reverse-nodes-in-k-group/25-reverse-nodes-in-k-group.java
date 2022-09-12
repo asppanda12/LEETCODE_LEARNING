@@ -1,61 +1,28 @@
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
-class Solution 
-{
-    public ListNode reverse(ListNode pre1,ListNode head,ListNode end)
-    {
-        ListNode pre=head;
-        ListNode curr=head.next;
-        ListNode next=null;
-        while(curr!=end)
-        {
-            next=curr.next;
-            if(pre==head)
-            {
-                pre.next=pre1;
-                curr.next=pre;
-            }
-            else
-            {
-                 curr.next=pre;   
-            }
-            pre=curr;
-            curr=next;
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode curr=head;
+        for(int i=0;i<k-1 && curr!=null;i++){
+            curr=curr.next;
         }
-        return pre;
-    } 
-    public ListNode res(ListNode head,int k,ListNode pre)
-    {
-          ListNode root=head;
-        for(int i=1;i<=k-1 &&  root!=null;i++)
-        {
-            root=root.next;
-        }
-        if(root==null)
-        {
+        if(curr==null){
             return head;
         }
-        else
-        {
-            ListNode end=root.next;
-            ListNode pre1=reverse(pre,head,end);
-            ListNode karp=res(end,k,head);
-            head.next=karp;
-            return pre1;
-        }
+        ListNode next = curr.next;
+        curr.next=null;
+        ListNode reversed = reverse(head);
+        head.next = reverseKGroup(next,k);
+        return reversed;
     }
-     public ListNode reverseKGroup(ListNode head, int k) 
-     {
-
-         ListNode r=res(head,k,null);           
-         return r;
-     }
+    public ListNode reverse(ListNode head){
+        ListNode curr=head,prev=null,next=null;
+        while(curr!=null){
+            next = curr.next;
+            if(prev!=null){
+                curr.next=prev;
+            }
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+    }
 }
